@@ -57,9 +57,6 @@ public class ChatController {
             // Broadcast message through WebSocket
             messagingTemplate.convertAndSend("/topic/messages", employeeMessage);
             
-            // Send to Kafka
-            kafkaTemplate.send(messageRequestTopic, employeeMessage);
-            
             return ResponseEntity.ok("Employee response processed");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
