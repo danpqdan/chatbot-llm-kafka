@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Message Sender</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="login-form" class="login-form">
+            <h2>Enter Chat</h2>
+            <input type="text" id="username" placeholder="Enter your username" required>
+            <button onclick="registerUser()">Join Chat</button>
+        </div>
+        
+        <div id="chat-container" class="chat-container" style="display: none;">
+            <h1>Chat System</h1>
+            <p id="current-user"></p>
+            <div id="chat-box" class="chat-box"></div>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="status" class="status"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
