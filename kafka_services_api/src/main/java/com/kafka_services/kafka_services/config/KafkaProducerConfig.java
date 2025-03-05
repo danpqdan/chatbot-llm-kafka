@@ -1,7 +1,6 @@
 package com.kafka_services.kafka_services.config;
 
 import java.util.Map;
-
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +11,8 @@ import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 @Configuration
 public class KafkaProducerConfig {
@@ -22,13 +23,15 @@ public class KafkaProducerConfig {
     private String emailRequestTopic;
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> properties = kafkaProperties.buildProducerProperties();
+        properties.put("key.serializer", StringSerializer.class);
+        properties.put("value.serializer", JsonSerializer.class);
         return new DefaultKafkaProducerFactory<>(properties);
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate(){
+    public KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
