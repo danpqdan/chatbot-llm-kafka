@@ -11,7 +11,7 @@ public class EmailConsumerService {
     
     private static final Logger logger = LoggerFactory.getLogger(EmailConsumerService.class);
 
-    @KafkaListener(topics = "${topicos.pagamento.request.topic}")
+    @KafkaListener(topics = "${request.message.topic}")
     public void consume(RequestDTO message) {
         logger.info("Processing new message: {}", message.message());
         System.out.println(message.message());
