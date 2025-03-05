@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Conversation</title>
+    <link rel="stylesheet" href="css/employee-styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversation with <span id="current-user"></span></h1>
+        <div id="conversation-messages" class="messages-list"></div>
+        <div class="response-form">
+            <textarea id="response-message" placeholder="Type your response..."></textarea>
+            <button onclick="sendResponse()">Send Response</button>
+        </div>
+    </div>
+    <script src="js/conversation.js"></script>
+</body>
+</html>

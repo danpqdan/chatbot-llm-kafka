@@ -1,6 +1,18 @@
 let stompClient = null;
 let currentUser = null;
 
+async function loadPreviousMessages(username) {
+    try {
+        const response = await fetch(`http://localhost:9090/messages/${username}`);
+        const messages = await response.json();
+        if (Array.isArray(messages)) {
+            messages.forEach(message => displayMessage(message));
+        }
+    } catch (error) {
+        console.error('Error loading messages:', error);
+    }
+}
+
 function registerUser() {
     const username = document.getElementById('username').value;
     if (!username) {
@@ -13,6 +25,7 @@ function registerUser() {
     document.getElementById('chat-container').style.display = 'block';
     document.getElementById('current-user').textContent = `Logged in as: ${username}`;
     
+    loadPreviousMessages(username);
     connectWebSocket();
 }
 
@@ -25,16 +38,17 @@ function connectWebSocket() {
             const message = JSON.parse(response.body);
             displayMessage(message);
         });
-    }, function(error) {
-        console.log('WebSocket Error: ' + error);
     });
 }
 
 function displayMessage(message) {
     const chatBox = document.getElementById('chat-box');
     const messageElement = document.createElement('div');
-    messageElement.textContent = message.message;
-    messageElement.className = 'message message-received';
+    messageElement.className = `message ${message.sender === 'Employee Support' ? 'message-support' : 'message-user'}`;
+    messageElement.innerHTML = `
+        <strong>${message.sender}</strong>
+        <p>${message.message}</p>
+    `;
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -52,8 +66,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     
     const requestData = {
         sender: currentUser,
-        message: messageText,
-        timestamp: new Date()
+        message: messageText
     };
 
     try {

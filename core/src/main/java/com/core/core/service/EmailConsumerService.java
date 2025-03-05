@@ -14,6 +14,7 @@ public class EmailConsumerService {
     @KafkaListener(topics = "${request.message.topic}")
     public void consume(RequestDTO message) {
         logger.info("Processing new message: {}", message.message());
+        System.out.println(message.sender());
         System.out.println(message.message());
         
         // Add your business logic here
