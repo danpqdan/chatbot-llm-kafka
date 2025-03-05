@@ -1,4 +1,4 @@
-package com.email_queue.email_queue.config;
+package com.kafka_services.kafka_services.config;
 
 import java.util.Map;
 

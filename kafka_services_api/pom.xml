@@ -8,10 +8,10 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.email_queue</groupId>
-	<artifactId>email_queue</artifactId>
+	<groupId>com.kafka_services</groupId>
+	<artifactId>kafka_services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>email_queue</name>
+	<name>kafka_services</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

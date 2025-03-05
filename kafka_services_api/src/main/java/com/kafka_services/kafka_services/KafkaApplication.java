@@ -1,13 +1,13 @@
-package com.email_queue.email_queue;
+package com.kafka_services.kafka_services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EmailQueueApplication {
+public class KafkaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EmailQueueApplication.class, args);
+		SpringApplication.run(KafkaApplication.class, args);
 	}
 
 }
