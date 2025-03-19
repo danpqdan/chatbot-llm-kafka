@@ -1,0 +1,29 @@
+### producer.kafka
+
+PRODUCER keyed-json-message
+topic: email-consumer-group
+key: mykeyq
+headers: header1=value1, header2=value2
+value: {}
+record content
+
+###
+
+PRODUCER non-keyed-json-message
+topic: core.request.message.topic.v1
+{
+    "@type": "requestDTO",
+    "sender": "Teste",
+    "message": "this is message automated by kafka producer for teste",
+    "text":"Message from kafka producer"
+}
+
+###
+
+PRODUCER non-keyed-json-message
+topic: cliente.request.message.topic.v1
+{
+    "sender": "Teste:daniel",
+    "message": "this is message automated by kafka producer for teste",
+    "text":"Message from kafka producer"
+}
