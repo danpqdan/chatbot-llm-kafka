@@ -24,8 +24,8 @@ public class EmailProducerService {
         RequestDTO employeeResponse = new RequestDTO(
                 message,
                 "Employee Support:"+username);
-        emailConsumerService.responseMessage(username, employeeResponse);
         kafkaTemplate.send(clienteMessageRequestTopic, employeeResponse);
+        emailConsumerService.responseMessage(username, employeeResponse);
     }
     
 }

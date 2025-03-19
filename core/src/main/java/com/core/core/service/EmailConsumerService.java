@@ -41,6 +41,8 @@ public class EmailConsumerService {
     }
 
     public void responseMessage(String username, RequestDTO message) {
+        String format = message.getSender().split(":")[0];
+        message.setSender(format);
         messageHistory.computeIfAbsent(username, k -> new ArrayList<>())
                 .add(message);
     }
