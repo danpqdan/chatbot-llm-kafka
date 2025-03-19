@@ -31,7 +31,7 @@ function sendResponse() {
     
     const message = document.getElementById('response-message').value;
     
-    fetch(`http://localhost:9090/messages/${selectedUser}`, {
+    fetch(`http://localhost:8080/messages/${selectedUser}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

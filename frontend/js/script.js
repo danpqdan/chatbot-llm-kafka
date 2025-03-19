@@ -24,21 +24,30 @@ function registerUser() {
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('chat-container').style.display = 'block';
     document.getElementById('current-user').textContent = `Logged in as: ${username}`;
-    
+
     loadPreviousMessages(username);
-    connectWebSocket();
+    connectWebSocket(username);
 }
 
-function connectWebSocket() {
+function connectWebSocket(username) {
     const socket = new SockJS('http://localhost:9090/ws');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function(frame) {
+
+    stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/messages', function(response) {
+
+        // Alterando a rota para mensagens privadas
+        stompClient.subscribe(`/user/${username}/messages`, function (response) {
             const message = JSON.parse(response.body);
             displayMessage(message);
         });
     });
+
+    // Se a conexão cair, tentar reconectar
+    socket.onclose = function () {
+        console.warn('WebSocket disconnected, attempting to reconnect...');
+        setTimeout(() => connectWebSocket(username), 5000);
+    };
 }
 
 function displayMessage(message) {
@@ -55,15 +64,15 @@ function displayMessage(message) {
 
 document.getElementById('messageForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     if (!currentUser) {
         alert('Please login first');
         return;
     }
-    
+
     const messageText = document.getElementById('message').value;
     const statusDiv = document.getElementById('status');
-    
+
     const requestData = {
         sender: currentUser,
         message: messageText

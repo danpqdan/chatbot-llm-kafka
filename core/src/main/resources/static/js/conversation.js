@@ -3,7 +3,7 @@ let currentUser = new URLSearchParams(window.location.search).get('user');
 function loadConversation() {
     document.getElementById('current-user').textContent = currentUser;
     
-    fetch(`http://localhost:9090/messages/${currentUser}`)
+    fetch(`http://localhost:8080/messages/${currentUser}`)
         .then(response => response.json())
         .then(data => {
             if (!Array.isArray(data)) {
@@ -29,12 +29,13 @@ function loadConversation() {
 function sendResponse() {
     const message = document.getElementById('response-message').value;
     
-    fetch(`http://localhost:9090/messages/${currentUser}`, {
+    fetch(`http://localhost:8080/messages/${currentUser}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            sender: 'Employee Support',
             message: message
         })
     })
