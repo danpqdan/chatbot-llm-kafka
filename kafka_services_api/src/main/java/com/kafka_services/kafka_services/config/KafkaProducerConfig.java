@@ -19,7 +19,7 @@ public class KafkaProducerConfig {
     @Autowired
     private KafkaProperties kafkaProperties;
 
-    @Value("${request.message.topic}")
+    @Value("${core.request.message.topic}")
     private String messageRequestTopic;
 
     @Bean
